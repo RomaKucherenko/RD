@@ -1,0 +1,12 @@
+.profile_header{
+    margin: 0 auto;
+    border:1px solid darkblue;
+    grid-area: pH;
+}
+.profile_me{
+    grid-area: pM;
+    border:1px solid darkblue;
+  
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}

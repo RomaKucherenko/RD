@@ -1,6 +1,5 @@
 .profile {
-    grid-area: p;
-  
+
     display: grid;
     grid-template-rows: 405px 100px auto;
     grid-gap: 10px;
@@ -8,28 +7,5 @@
     'pH'
     'pM'
     'pP';
-}
-.profile_header{
-    margin: 0 auto;
-    border:1px solid darkblue;
-    grid-area: pH;
-}
-.profile_me{
-    grid-area: pM;
-    border:1px solid darkblue;
-  
-    display: grid;
-    grid-template-columns: 1fr 4fr;
-}
-  
-.profile_posts{
-    grid-area: pP;
-    border:1px solid darkblue;
-}
 
-.profile {
-    border:5px solid brown;
-}
-.item {
-    color: goldenrod;
 }

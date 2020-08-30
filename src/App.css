@@ -11,5 +11,9 @@
   "h h" 
   "n p";
 }
+.app-wrapper-content {
+  grid-area: p;
+  border:5px solid #a52a2a;
+}
 
 

@@ -1,0 +1,5 @@
+.profile_header{
+    margin: 0 auto;
+    border:1px solid darkblue;
+    grid-area: pH;
+}

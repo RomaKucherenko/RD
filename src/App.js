@@ -5,16 +5,19 @@ import Nav from './components/Nav/Nav';
 import Profile from './components/Profile/Profile';
 
 
-
 // Возвращает JSX разметку - Компонента
 function App() {
-  return (
-    <div className="app-wrapper">
-      <Header/>
-      <Nav/>
-      <Profile/>
-    </div>
-  )
+    return (
+        <div className="app-wrapper">
+            <Header/>
+            <Nav/>
+            <div className="app-wrapper-content">
+                <Profile/>
+            </div>
+            {/*<Profile/>*/}
+
+        </div>
+    )
 }
 
 

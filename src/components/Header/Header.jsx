@@ -2,9 +2,9 @@ import React from 'react';
 import s from './Header.module.css'
 
 const Header = () => {
-    return(
+    return (
         <header className={s.header}>
-        <img src="https://sun9-76.userapi.com/W0szd5CsHa7vtJ_2nAaUkJOgW54axhZd1Lemqw/foDCX_Ftk40.jpg" />
+            <img src="https://sun9-76.userapi.com/W0szd5CsHa7vtJ_2nAaUkJOgW54axhZd1Lemqw/foDCX_Ftk40.jpg" alt="Иди нахуй" />
         </header>
     )
 }
