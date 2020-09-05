@@ -1,12 +1,12 @@
 import React from 'react'
-import s from './ProfileHeader.module.css'
+import s from './Header.module.css'
 
-const ProfileHeader = () => {
+const Header = () => {
     return (
-        <div className={s.profile_header}>
+        <div className={s.Header}>
             <img src="https://www.bojiboatbrokers.com/wp/wp-content/uploads/bojiboatbrokers.com/2019/04/DJI_0797-HDR-960x400.jpg" alt="" />
         </div>
     )
 }
 
-export default ProfileHeader
+export default Header

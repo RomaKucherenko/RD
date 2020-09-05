@@ -1,13 +1,13 @@
 import React from 'react';
 import s from './Profile.module.css'
-import ProfileHeader from './ProfileHeader/ProfileHeader';
+import Header from './Header/Header';
 import Me from './Me/Me';
 import Posts from './Posts/Posts';
 
 const Profile = () => {
     return (
         <div className={s.profile}>
-            <ProfileHeader />
+            <Header />
             <Me />
             <Posts />
         </div>

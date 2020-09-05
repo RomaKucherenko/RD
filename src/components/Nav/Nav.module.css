@@ -1,9 +1,17 @@
 .nav {
   grid-area: n;
+  padding: 18px;
 }
 .nav {
   border:1px solid brown;
 }
-.item {
-  color: red;
+.item a{
+  text-decoration: none;
+  color: blue;
+}
+.item a.active {
+  color: green;
+}
+.item:last-child {
+  padding-top:  25px;
 }

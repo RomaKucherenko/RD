@@ -1,0 +1,10 @@
+.Avatar {
+    border: 1px solid chocolate;
+}
+.Avatar img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+
+    padding: 10px 10px;
+}
