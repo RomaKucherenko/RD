@@ -4,12 +4,12 @@ import Header from './Header/Header';
 import Me from './Me/Me';
 import Posts from './Posts/Posts';
 
-const Profile = () => {
+const Profile = (props) => {
     return (
         <div className={s.profile}>
             <Header />
             <Me />
-            <Posts />
+            <Posts posts={props.state.posts}/>
         </div>
     )
 }
