@@ -1,5 +1,5 @@
 let store = {
-    _state : {
+    _state: {
         dialogsPage: {
             messages: [
                 {id: 1, message: 'Hi', path: "./img/avatars/foto_1.jpg"},
@@ -25,23 +25,19 @@ let store = {
             newPostText: "Введи что-то"
         }
     },
-    get state(){
+    _callSubscriber() {
+        //В дальнейшем ты будешь хранить ссылку на rerenderEntireTree
+    },
+
+    get state() {
         return this._state
     },
-    _callSubscriber(){
-    //В дальнейшем ты будешь хранить ссылку на rerenderEntireTree
+    subscriber(observer) {
+        this._callSubscriber = observer
     },
-    addPost(){
-        let newPost = {
-            id: 3,
-            message: this._state.profilePage.newPostText,
-            likes_count: 0
-        }
-        this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.newPostText = ""
-        this._callSubscriber()
-    },
-    addMessage(){
+
+
+    addMessage() {
         let newMessage = {
             id: 3,
             message: this._state.dialogsPage.newMessageText,
@@ -51,22 +47,31 @@ let store = {
         this._state.dialogsPage.newMessageText = ""
         this._callSubscriber()
     },
-    updateNewPostText(newText){
-        this._state.profilePage.newPostText = newText
-        this._callSubscriber()
-
-    },
-    updateNewMessageText(newText){
+    updateNewMessageText(newText) {
         this._state.dialogsPage.newMessageText = newText
         this._callSubscriber()
 
     },
 
-    subscriber(observer){
-         this._callSubscriber = observer
+    dispatch(action) {
+        //Каждый раз когда мы захотим изменить state
+        //Мы будем вызывать dispatch и передавать в него объект action
+        // { type: `ADD-POST`}
+        if (action.type === `ADD-POST`) {
+            let newPost = {
+                id: 3,
+                message: this._state.profilePage.newPostText,
+                likes_count: 0
+            }
+            this._state.profilePage.posts.push(newPost)
+            this._state.profilePage.newPostText = ""
+            this._callSubscriber()
+        } else if (action.type === `UPDATE-NEW-POST-TEXT`) {
+            this._state.profilePage.newPostText = action.newText
+            this._callSubscriber()
+        }
     }
 }
-window.store = store
 window.store = store
 
 export default store

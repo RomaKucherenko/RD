@@ -8,18 +8,17 @@ const Posts = (props) => {
         post => <Post id={post.id} message={post.message} likes_count={post.likes_count}/>
     )
 
+
     let newPostElement = React.createRef();
 
     let addPost = () => {
-        console.log(this)
-        debugger
-        props.addPost()
+        props.dispatch({type: `ADD-POST`})
     }
     let changeText = () => {
         let text = newPostElement.current.value
-        props.store.updateNewPostText(text)
+        let action = {type: `UPDATE-NEW-POST-TEXT`, newText: text};
+        props.dispatch(action)
     }
-
     return (
         <div className={s.Posts}>
             <h3>Posts</h3>

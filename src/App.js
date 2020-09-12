@@ -19,9 +19,7 @@ function App(props) {
                                                               updateNewMessageText={props.store.updateNewMessageText.bind(props.store)}
                                                               addMessage={props.store.addMessage.bind(props.store)}/>}/>
                 <Route path="/Profile" render={() => <Profile profilePage={props.store.state.profilePage}
-                                                              addPost={props.store.addPost.bind(props.store)}
-                                                              updateNewPostText={props.store.updateNewPostText}
-                                                              store={props.store}/>}
+                                                              dispatch={props.store.dispatch.bind(props.store)}/>}
                 />
             </div>
         </div>
