@@ -3,10 +3,14 @@
 
     grid-template-columns: 2fr 10fr;
 }
-
+.Messages textarea{
+    width: 815px;
+}
+.DialogsItems{
+    border-right: 1px solid saddlebrown;
+}
 .DialogItem{
     text-align: center;
-    border-right: 1px solid saddlebrown;
 }
 .DialogItem a {
     text-decoration: none;
@@ -15,7 +19,19 @@
 .DialogItem a.active{
     color:green;
 }
-
-.Message{
-    text-align: center;
+.DialogItem img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+.Message img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+.left{
+    text-align: left;
+}
+.right{
+    text-align: right;
 }

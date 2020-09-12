@@ -4,22 +4,28 @@ import Header from './components/Header/Header'
 import Nav from './components/Nav/Nav';
 import Profile from './components/Profile/Profile';
 import Dialogs from "./components/Dialogs/Dialogs";
-import {BrowserRouter, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 
 
 // Возвращает JSX разметку - Компонента
 function App(props) {
     return (
-        <BrowserRouter>
-            <div className="app-wrapper">
-                <Header/>
-                <Nav/>
-                <div className="app-wrapper-content">
-                    <Route path="/Dialogs"  render={() => <Dialogs state={props.state.dialogsPage}/>}/>
-                    <Route path="/Profile" render={() => <Profile state={props.state.profilePage}/>}/>
-                </div>
+
+        <div className="app-wrapper">
+            <Header/>
+            <Nav/>
+            <div className="app-wrapper-content">
+                <Route path="/Dialogs" render={() => <Dialogs dialogsPage={props.store.state.dialogsPage}
+                                                              updateNewMessageText={props.store.updateNewMessageText.bind(props.store)}
+                                                              addMessage={props.store.addMessage.bind(props.store)}/>}/>
+                <Route path="/Profile" render={() => <Profile profilePage={props.store.state.profilePage}
+                                                              addPost={props.store.addPost.bind(props.store)}
+                                                              updateNewPostText={props.store.updateNewPostText}
+                                                              store={props.store}/>}
+                />
             </div>
-        </BrowserRouter>
+        </div>
+
     )
 }
 
