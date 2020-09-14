@@ -16,8 +16,7 @@ function App(props) {
             <Nav/>
             <div className="app-wrapper-content">
                 <Route path="/Dialogs" render={() => <Dialogs dialogsPage={props.store.state.dialogsPage}
-                                                              updateNewMessageText={props.store.updateNewMessageText.bind(props.store)}
-                                                              addMessage={props.store.addMessage.bind(props.store)}/>}/>
+                                                              dispatch={props.store.dispatch.bind(props.store)}/>}/>
                 <Route path="/Profile" render={() => <Profile profilePage={props.store.state.profilePage}
                                                               dispatch={props.store.dispatch.bind(props.store)}/>}
                 />

@@ -2,8 +2,13 @@
     grid-area: pP;
     border:1px solid darkblue;
 }
-.NewPost{
 
+.NewPost textarea{
+    width: 200px;
+    font-weight: 900;
+}.NewPost textarea:focus{
+    width: 240px;
+    font-weight: 100;
 }
 .PostsList{
 
