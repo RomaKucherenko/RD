@@ -1,7 +1,15 @@
 const ADD_POST = `ADD-POST`;
 const UPDATE_NEW_POST_TEXT = `UPDATE-NEW-POST-TEXT`;
 
-export const profileReducer = (state, action) => {
+let initialState = {
+    posts: [
+        {id: 1, message: "TE AVEN BAXTALE", likes_count: 4},
+        {id: 2, message: "TE AVEN BAXTALE", likes_count: 5}
+    ],
+    newPostText: ""
+}
+
+export const profileReducer = (state = initialState, action) => {
     //Reducer только изменяет STATE, вызывать callSubscriber
     //мы не будем, тк это не наша responsibility, наша только в том
     //чтобы изменить STATE. Subscriber должен следить за этим изменением
@@ -27,7 +35,7 @@ export const profileReducer = (state, action) => {
     }
 }
 
-export const addPostActionCreator = () => ( {type: ADD_POST} )
-export const updateNewPostTextActionCreator = (text) => ( {type: UPDATE_NEW_POST_TEXT, newText: text} )
+export const addPostCreator = () => ( {type: ADD_POST} )
+export const updateNewPostTextCreator = (text) => ( {type: UPDATE_NEW_POST_TEXT, newText: text} )
 
 export default profileReducer

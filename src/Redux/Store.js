@@ -36,7 +36,7 @@ let store = {
     get state() {
         return this._state
     },
-    subscriber(observer) {
+    subscribe(observer) {
         this._callSubscriber = observer
     },
 
@@ -46,8 +46,8 @@ let store = {
         //Мы будем вызывать dispatch и передавать в него
         //объект action{ type: `ADD-POST`}
 
-        profileReducer(this._state.profilePage, action)
-        dialogsReducer(this._state.dialogsPage, action)
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         //Мы делегировали изменения STATE reducer'ам
         //а затем уведомили подписчика
         this._callSubscriber()
