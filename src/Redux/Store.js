@@ -1,10 +1,5 @@
-const ADD_POST = `ADD-POST`;
-const UPDATE_NEW_POST_TEXT = `UPDATE-NEW-POST-TEXT`;
-
-const UPDATE_NEW_MESSAGE_TEXT = `UPDATE-NEW-MESSAGE-TEXT`;
-const SEND_MESSAGE = `SEND-MESSAGE`;
-
-
+import profileReducer from "./profileReducer";
+import dialogsReducer from "./dialogsReducer";
 
 let store = {
     _state: {
@@ -35,6 +30,7 @@ let store = {
     },
     _callSubscriber() {
         //В дальнейшем ты будешь хранить ссылку на rerenderEntireTree
+        //Грубо говоря, это функция, которая следит за изменением STATE
     },
 
     get state() {
@@ -50,43 +46,13 @@ let store = {
         //Мы будем вызывать dispatch и передавать в него
         //объект action{ type: `ADD-POST`}
 
-        if (action.type === ADD_POST) {
-            let newPost = {
-                id: 3,
-                message: this._state.profilePage.newPostText,
-                likes_count: 0
-            }
-            this._state.profilePage.posts.push(newPost)
-            this._state.profilePage.newPostText = ""
-            this._callSubscriber()
-        }
-        else if (action.type === UPDATE_NEW_POST_TEXT) {
-            this._state.profilePage.newPostText = action.newText
-            this._callSubscriber()
-        }
-        else if (action.type === SEND_MESSAGE){
-            let text = this._state.dialogsPage.newMessageText
-            this._state.dialogsPage.newMessageText = ""
-            let newMessage = {
-                id: 6,
-                message: text,
-                path: "./img/avatars/foto_1.jpg"
-            }
-            this._state.dialogsPage.messages.push(newMessage)
-            this._callSubscriber()
-        }
-        else if (action.type === UPDATE_NEW_MESSAGE_TEXT){
-            this._state.dialogsPage.newMessageText = action.newMessageText
-            this._callSubscriber()
-        }
+        profileReducer(this._state.profilePage, action)
+        dialogsReducer(this._state.dialogsPage, action)
+        //Мы делегировали изменения STATE reducer'ам
+        //а затем уведомили подписчика
+        this._callSubscriber()
     }
 }
-
-export const addPostActionCreator = () => ( {type: ADD_POST} )
-export const updateNewPostTextActionCreator = (text) => ( {type: UPDATE_NEW_POST_TEXT, newText: text} )
-export const addNewMessageCreator = () => ( {type: SEND_MESSAGE} )
-export const updateNewMessageTextCreator = (text) => ( {type: UPDATE_NEW_MESSAGE_TEXT, newMessageText: text} )
-
 
 window.store = store
 
