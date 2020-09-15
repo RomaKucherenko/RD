@@ -54,10 +54,6 @@ let store = {
     }
 }
 
-window.store = store
-
 // setInterval(
 //     () => console.log(store._state.profilePage.newPostText), 1000
 // )
-
-export default store

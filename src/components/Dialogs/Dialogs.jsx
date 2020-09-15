@@ -3,42 +3,30 @@ import s from './Dialogs.module.css'
 
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
-import {addNewMessageCreator, updateNewMessageTextCreator} from "../../Redux/dialogsReducer";
+
 
 
 
 const Dialogs = (props) => {
-    /* ПОТОМ
-     НУЖНО
-     ОБЯЗАТЕЛЬНО ПРИДУМАТЬ
-     КУДА ЕЁ ВЫНЕСТИ!!!
-         !!
-             !!*/
-    let fun = function (index) {
-        return index % 2 ? s.right : s.left
-    }
-
     /*Т.Е. Я для каждого элемента массива диалогов должен создать компоненту и в пропсы закинуть свойство
     * из этого массива*/
-    let dialogsElements = props.dialogsPage.dialogs.map(
+
+    let dialogsElements = props.dialogs.map(
         dialog => <DialogItem name={dialog.name} id={dialog.id} src={dialog.path}/>
     )
 
-    let messagesElements = props.dialogsPage.messages.map(
+    let messagesElements = props.messages.map(
         (message, index) => <Message
             message={message.message} id={message.id}
-            side={fun(index)} src={message.path}
+            side={props.sideSelector(index, s.right, s.left)} src={message.path}
         />
     )
-
-    let addMessage = () => {
-        let action = addNewMessageCreator()
-        props.dispatch( action )
+    let onAddMessage = () => {
+        props.addMessage()
     }
-    let textChange = (e) => {
+    let onTextChange = (e) => {
         let txt = e.target.value
-        let action = updateNewMessageTextCreator(txt)
-        props.dispatch( action )
+        props.updateNewMessageText(txt)
     }
     return (
         <div className={s.Dialogs}>
@@ -48,9 +36,9 @@ const Dialogs = (props) => {
             <div className={s.Messages}>
                 <div>{messagesElements}</div>
                 <div>
-                    <textarea onChange={textChange} placeholder="Введите ваше сообщение"
-                              value={props.dialogsPage.newMessageText}/>
-                    <button onClick={addMessage}>Отправить сообщение</button>
+                    <textarea onChange={onTextChange} placeholder="Введите ваше сообщение"
+                              value={props.newMessageText}/>
+                    <button onClick={onAddMessage}>Отправить сообщение</button>
                 </div>
             </div>
         </div>
