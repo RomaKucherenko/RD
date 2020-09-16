@@ -6,7 +6,8 @@ import Post from './Post/Post'
 const Posts = (props) => {
 
     let postsElements = props.posts.map(
-        post => <Post id={post.id} message={post.message} likes_count={post.likes_count}/>
+        post => <Post id={post.id} message={post.message} likesCount={post.likesCount}
+                      addLike={props.addLike}/>
     )
 
     let onAddPost = () => {

@@ -5,10 +5,11 @@ import {BrowserRouter} from "react-router-dom";
 import React from "react";
 import App from "./App";
 
-window.store = store
-console.log( store )
 
 let rerenderEntireTree = () => {
+    //Document Object Model, сокращённо DOM – объектная модель документа,
+    // которая представляет все содержимое страницы в виде объектов,
+    // которые можно менять.
     ReactDOM.render(
         <BrowserRouter>
             <React.StrictMode>

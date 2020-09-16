@@ -1,10 +1,11 @@
 const ADD_POST = `ADD-POST`;
 const UPDATE_NEW_POST_TEXT = `UPDATE-NEW-POST-TEXT`;
+const ADD_LIKE = `ADD_LIKE`;
 
 let initialState = {
     posts: [
-        {id: 1, message: "TE AVEN BAXTALE", likes_count: 4},
-        {id: 2, message: "TE AVEN BAXTALE", likes_count: 5}
+        {id: 1, message: "TE AVEN BAXTALE", likesCount: 4},
+        {id: 2, message: "TE AVEN BAXTALE", likesCount: 5}
     ],
     newPostText: ""
 }
@@ -18,7 +19,7 @@ export const profileReducer = (state = initialState, action) => {
             let newPost = {
                 id: 3,
                 message: state.newPostText,
-                likes_count: 0
+                likesCount: 0
             }
             state.posts.push(newPost)
             state.newPostText = ""
@@ -29,13 +30,22 @@ export const profileReducer = (state = initialState, action) => {
             state.newPostText = action.newText
             //this._callSubscriber() См. комменты сверху
             return state
+        case ADD_LIKE:
+            let id = action.id
+            for (const item of state.posts) {
+                if (item.id === id) {
+                    item.likesCount++
+                }
+            }
+            return state
         default:
             return state
 
     }
 }
 
-export const addPostCreator = () => ( {type: ADD_POST} )
-export const updateNewPostTextCreator = (text) => ( {type: UPDATE_NEW_POST_TEXT, newText: text} )
+export const addPostCreator = () => ({type: ADD_POST})
+export const updateNewPostTextCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text})
+export const addLikeCreator = (id) => ({type: ADD_LIKE, id: id})
 
 export default profileReducer

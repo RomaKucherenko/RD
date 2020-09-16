@@ -1,11 +1,7 @@
 import React from 'react'
 import s from './Dialogs.module.css'
-
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
-
-
-
 
 const Dialogs = (props) => {
     /*Т.Е. Я для каждого элемента массива диалогов должен создать компоненту и в пропсы закинуть свойство
@@ -25,9 +21,12 @@ const Dialogs = (props) => {
         props.addMessage()
     }
     let onTextChange = (e) => {
+        //Когда происходит событие, браузер создаёт объект события,
+        // записывает в него детали и передаёт его в качестве аргумента функции-обработчику
         let txt = e.target.value
         props.updateNewMessageText(txt)
     }
+
     return (
         <div className={s.Dialogs}>
             <div className={s.DialogsItems}>

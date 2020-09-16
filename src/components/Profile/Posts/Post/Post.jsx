@@ -2,6 +2,10 @@ import React from 'react'
 import s from './Post.module.css'
 
 const Post = (props) => {
+    const onLike = () => {
+        props.addLike(props.id)
+    }
+
     return (
         <div className={s.item}>
             <img
@@ -9,8 +13,8 @@ const Post = (props) => {
                 alt=""/>
             {props.message}
             <div>
-                <button id="but">like</button>
-                {props.likes_count}</div>
+                <button onClick={onLike}>like</button>
+                {props.likesCount}</div>
         </div>
     )
 }
