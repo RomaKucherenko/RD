@@ -8,14 +8,14 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 
 // Возвращает JSX разметку - Компонента
-function App(props) {
+function App() {
     return (
         <div className="app-wrapper">
             <Header/>
             <Nav/>
             <div className="app-wrapper-content">
-                <Route path="/Dialogs" render={() => <DialogsContainer store={props.store}/>}/>
-                <Route path="/Profile" render={() => <Profile store={props.store}/>}
+                <Route path="/Dialogs" render={() => <DialogsContainer />}/>
+                <Route path="/Profile" render={() => <Profile />}
                 />
             </div>
         </div>

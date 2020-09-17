@@ -4,12 +4,12 @@ import Header from './Header/Header';
 import Me from './Me/Me';
 import PostsContainer from "./Posts/PostsContainer";
 
-const Profile = (props) => {
+const Profile = () => {
     return (
         <div className={s.profile}>
             <Header/>
             <Me/>
-            <PostsContainer store={props.store}/>
+            <PostsContainer />
         </div>
     )
 }

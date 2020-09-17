@@ -9,6 +9,8 @@ let reducers = combineReducers({
 
 let store = createStore(reducers)
 
-window.store = store
+// setInterval(() => window.nMT = store.getState().dialogsPage.newMessageText, 1)
+//
+// setInterval(() => console.log(window.nMT), 1000)
 
 export default store

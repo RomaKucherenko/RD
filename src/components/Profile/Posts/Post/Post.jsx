@@ -13,7 +13,7 @@ const Post = (props) => {
                 alt=""/>
             {props.message}
             <div>
-                <button onClick={onLike}>like</button>
+                <button onClick={onLike}>Like</button>
                 {props.likesCount}</div>
         </div>
     )
