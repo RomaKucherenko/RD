@@ -7,14 +7,19 @@ const Dialogs = (props) => {
     /*Т.Е. Я для каждого элемента массива диалогов должен создать компоненту и в пропсы закинуть свойство
     * из этого массива*/
 
-    let dialogsElements = props.dialogs.map(
+    const sideSelector = (index, right, left) => {
+        //Вынести её, ёпта, куда-нибудь
+        return index % 2 ? right : left
+    }
+
+    let dialogsElements = props.dialogsPage.dialogs.map(
         dialog => <DialogItem name={dialog.name} id={dialog.id} src={dialog.path}/>
     )
 
-    let messagesElements = props.messages.map(
+    let messagesElements = props.dialogsPage.messages.map(
         (message, index) => <Message
             message={message.message} id={message.id}
-            side={props.sideSelector(index, s.right, s.left)} src={message.path}
+            side={sideSelector(index, s.right, s.left)} src={message.path}
         />
     )
     let onAddMessage = () => {
@@ -36,7 +41,7 @@ const Dialogs = (props) => {
                 <div>{messagesElements}</div>
                 <div>
                     <textarea onChange={onTextChange} placeholder="Введите ваше сообщение"
-                              value={props.newMessageText}/>
+                              value={props.dialogsPage.newMessageText}/>
                     <button onClick={onAddMessage}>Отправить сообщение</button>
                 </div>
             </div>

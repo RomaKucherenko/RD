@@ -15,29 +15,37 @@ export const profileReducer = (state = initialState, action) => {
     //мы не будем, тк это не наша responsibility, наша только в том
     //чтобы изменить STATE. Subscriber должен следить за этим изменением
     switch (action.type) {
-        case ADD_POST:
+        case ADD_POST: {
             let newPost = {
                 id: 3,
                 message: state.newPostText,
                 likesCount: 0
             }
-            state.posts.push(newPost)
-            state.newPostText = ""
+            let stateCopy = {...state}
+            stateCopy.posts = [...state.posts]
+            stateCopy.posts.push(newPost)
+            stateCopy.newPostText = ""
             //this._callSubscriber() См. комменты сверху
-            return state
+            return stateCopy
+        }
 
-        case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.newText
+        case UPDATE_NEW_POST_TEXT: {
+            let stateCopy = {...state}
+            stateCopy.newPostText = action.newText
             //this._callSubscriber() См. комменты сверху
-            return state
-        case ADD_LIKE:
+            return stateCopy
+        }
+        case ADD_LIKE: {
+            let stateCopy = {...state}
+            stateCopy.posts = [...state.posts]
             let id = action.id
-            for (const item of state.posts) {
+            for (const item of stateCopy.posts) {
                 if (item.id === id) {
                     item.likesCount++
                 }
             }
-            return state
+            return stateCopy
+        }
         default:
             return state
 
