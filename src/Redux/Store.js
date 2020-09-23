@@ -53,7 +53,3 @@ let store = {
         this._callSubscriber()
     }
 }
-
-// setInterval(
-//     () => console.log(store._state.profilePage.newPostText), 1000
-// )

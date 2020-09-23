@@ -5,6 +5,8 @@ import Me from './Me/Me';
 import PostsContainer from "./Posts/PostsContainer";
 
 const Profile = () => {
+
+    // console.log(elem.width)
     return (
         <div className={s.profile}>
             <Header/>

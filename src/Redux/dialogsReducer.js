@@ -25,24 +25,23 @@ const dialogsReducer = (state = initialState, action) => {
     //чтобы изменить STATE. Subscriber должен следить за этим изменением
     switch (action.type) {
         case SEND_MESSAGE: {
-            let stateCopy = {...state}
-            let text = stateCopy.newMessageText
-            stateCopy.newMessageText = ""
+            let text = state.newMessageText
             let newMessage = {
                 id: 6,
                 message: text,
                 path: "./img/avatars/foto_1.jpg"
             }
-            stateCopy.messages = [...state.messages]
-            stateCopy.messages.push(newMessage)
-            //this._callSubscriber() См. комменты сверху
-            return stateCopy
+            return  {
+                ...state,
+                newMessageText : "",
+                messages: [...state.messages, newMessage]
+            }
         }
         case UPDATE_NEW_MESSAGE_TEXT: {
-            let stateCopy = {...state}
-            stateCopy.newMessageText = action.newMessageText
-            //this._callSubscriber() См. комменты сверху
-            return stateCopy
+            return {
+                ...state,
+                newMessageText: action.newMessageText
+            }
         }
         default:
             return state

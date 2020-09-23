@@ -7,6 +7,8 @@ const DialogItem = (props) => {
     return (
         <div className={s.DialogItem}>
             <img src={props.src}/>
+            {/*Мы здесь используем NavLink для того чтобы смена URL'a происходила без*/}
+            {/*перезагрузки страницы*/}
             <NavLink activeClassName={s.active} to={path}>{props.name}</NavLink>
         </div>
     )

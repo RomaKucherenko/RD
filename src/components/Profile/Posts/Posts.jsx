@@ -22,7 +22,7 @@ const Posts = (props) => {
             <h3>Posts</h3>
             <div className={s.NewPost}>
                 <div>
-                    <textarea placeholder="Введите тест вашего поста"
+                    <textarea placeholder="Введите текст вашего поста"
                               value={props.profilePage.newPostText}
                               onChange={onChangeText}/>
                 </div>

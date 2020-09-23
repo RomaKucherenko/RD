@@ -1,0 +1,21 @@
+.Users img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.User{
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+
+    border-bottom: 3px solid #e6e6fa;
+}
+.description{
+    display: grid;
+
+    grid-auto-flow: column;
+}
+.status{
+    background-color: lavender;
+    width: 140px;
+    box-sizing: border-box;
+}

@@ -9,10 +9,10 @@
   
   grid-template-areas: 
   "h h" 
-  "n p";
+  "n c";
 }
 .app-wrapper-content {
-  grid-area: p;
+  grid-area: c;
   border:5px solid #a52a2a;
 }
 
