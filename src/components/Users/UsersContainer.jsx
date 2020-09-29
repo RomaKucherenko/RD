@@ -18,7 +18,6 @@ let mapDispatchToProps = (dispatch) => {
             dispatch(unfollowCreator(id) )
         },
         setUsers: (users) => {
-            console.log(`я вызвался`)
             dispatch(setUsersCreator(users))
         }
     }

@@ -31,6 +31,7 @@ const dialogsReducer = (state = initialState, action) => {
                 message: text,
                 path: "./img/avatars/foto_1.jpg"
             }
+            debugger
             return  {
                 ...state,
                 newMessageText : "",

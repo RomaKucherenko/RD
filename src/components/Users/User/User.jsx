@@ -12,7 +12,7 @@ const User = (props) => {
     return <div className={s.User}>
         <div>
             <img src={props.avaURL}/>
-            <button onClick={onChange} value={props.followStatus} id={props.id}>
+            <button onClick={onChange} value={`props.followStatus`} id={props.id}>
                 {props.followStatus ? `UNFOLLOW` : `FOLLOW`}
             </button>
         </div>
@@ -22,7 +22,7 @@ const User = (props) => {
                 <p className={s.status}>{props.status}</p>
             </div>
             <div className={s.block}>
-                <p>{props.location.city},{props.location.country}</p>
+                <p>{`props.location.city`},{`props.location.country`}</p>
             </div>
         </div>
     </div>
