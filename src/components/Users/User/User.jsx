@@ -1,5 +1,6 @@
 import React from "react";
 import s from "./../Users.module.css"
+import defaultAvatar from "./../../../assets/avatars/RD.jpg"
 
 const User = (props) => {
     const onChange = () => {
@@ -11,8 +12,8 @@ const User = (props) => {
     }
     return <div className={s.User}>
         <div>
-            <img src={props.avaURL}/>
-            <button onClick={onChange} value={`props.followStatus`} id={props.id}>
+            <img src={props.avatar ? props.avatar : defaultAvatar}/>
+            <button onClick={onChange} id={props.id}>
                 {props.followStatus ? `UNFOLLOW` : `FOLLOW`}
             </button>
         </div>

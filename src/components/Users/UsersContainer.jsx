@@ -1,8 +1,9 @@
 import React from "react";
 import {followCreator, setUsersCreator, unfollowCreator} from "../../Redux/usersReducer";
 import {connect} from "react-redux";
-import Users from "./Users";
+import UsersClassComponent from "./UsersClassComponent";
 
+//Этот контейнер нам нужен для общения со Store
 let mapStateToProps = (state) => {
     return {
         users: state.usersPage.users
@@ -23,6 +24,6 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
-let UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users)
+let UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersClassComponent)
 
 export default UsersContainer

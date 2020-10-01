@@ -2,7 +2,7 @@ import React from "react";
 
 const News = (props) => {
     return <div>
-        <button></button>
+        <button>News</button>
     </div>
 }
 

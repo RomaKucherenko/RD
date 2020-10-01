@@ -3,3 +3,7 @@
     border:1px solid darkblue;
     grid-area: pH;
 }
+img {
+    width: 1000px;
+    height: 400px;
+}

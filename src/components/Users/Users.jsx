@@ -1,46 +1,22 @@
 import React from "react";
 import s from "./Users.module.css"
 import User from "./User/User";
-import {get} from "axios";
-import * as axios from "axios";
-// Зачем нам ClassComponent?
-// 1. <Users /> вызывало нашу функциональную компоненту
-// if (props.users.length === 0 ){ она отправляла запрос на сервер
-//     axios.get(`https://social-network.samuraijs.com/api/1.0/users`).then(response => {
-//             props.setUsers(response.data.items)
-//         }
-//     )
-// }
-// Что противоречит концепции чистых функций и называется сторонним эффектом(Side Effect),
-// т.е. функция "лезет" во внешний мир.
-// Путь решения проблемы:
-// Создать функцию getUsers(), button, повесить ему обработчик: по нажатию делать запрос на сервак-
-// это решение, НО пользователи нам нужны в тот момент, когда мы загрузили страницу, т.е. сразу,
-// а не после нажатия
-class Users extends React.Component {
 
-    componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users`).then(response => {
-                this.props.setUsers(response.data.items)
-            }
-        )
-    }
+const Users = (props) => {
+    let usersElements = props.users.map(u => {
+        return <User id={u.id} name={u.name} status={u.status} followStatus={u.followed}
+                     follow={props.follow} unfollow={props.unfollow} avatar={u.photos.small}/>
 
-    render() {
-        console.log(this.props.users.length)
-        let follow = (id) => {
-            this.props.follow(id)
-        }
-        let unfollow = (id) => {
-            this.props.unfollow(id)
-        }
-        let usersElements = this.props.users.map(u => {
-            return <User id={u.id} name={u.name} status={u.status}/>
-        })
-        return <div className={s.Users}>
-            {usersElements}
+    })
+    return <div className={s.Users}>
+        <div className={s.Pages} onClick={(e) => props.onPagesClick(e)}>
+            <button value={1}>1</button>
+            <button value={2}>2</button>
+            <button value={3}>3</button>
+            <button value={4}>4</button>
         </div>
-    }
+        {usersElements}
+    </div>
 }
 
 

@@ -1,9 +1,11 @@
 const FOLLOW = `FOLLOW`
 const UNFOLLOW = `UNFOLLOW`
 const SET_USERS = `SET_USERS`
+const SET_PAGE_NUMBER = `SET_PAGE_NUMBER`
 
 let initialState = {
-    users: [ ]
+    users: [],
+    pageNumber: 1
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -19,7 +21,7 @@ const usersReducer = (state = initialState, action) => {
                     if (u.id === action.userId) {
                         return {
                             ...u,
-                            followStatus: true
+                            followed: true
                         }
                     }
                     return u
@@ -32,7 +34,7 @@ const usersReducer = (state = initialState, action) => {
                     if (u.id === action.userId) {
                         return {
                             ...u,
-                            followStatus: false
+                            followed: false
                         }
                     }
                     return u
@@ -41,7 +43,12 @@ const usersReducer = (state = initialState, action) => {
         case SET_USERS:
             return {
                 ...state,
-                users: [...state.users, ...action.users]
+                users: [...action.users]
+            }
+        case SET_PAGE_NUMBER:
+            return {
+                ...state,
+                pageNumber: action.pageNumber
             }
         default:
             return state
@@ -51,6 +58,7 @@ const usersReducer = (state = initialState, action) => {
 export const followCreator = (userId) => ({type: FOLLOW, userId: userId})
 export const unfollowCreator = (userId) => ({type: UNFOLLOW, userId: userId})
 export const setUsersCreator = (users) => ({type: SET_USERS, users: users})
+export const setPageNumberCreator = (pageNumber) => ({type: SET_PAGE_NUMBER, pageNumber})
 
 
 export default usersReducer
