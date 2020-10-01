@@ -18,8 +18,10 @@ import Users from "./Users";
 class UsersClassComponent extends React.Component {
 
     componentDidMount() {
+        this.props.switchFetchingStatus(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${1}&count=${5}`)
             .then(response => {
+                this.props.switchFetchingStatus(false)
                 this.props.setUsers(response.data.items)
             }
         )
@@ -32,15 +34,18 @@ class UsersClassComponent extends React.Component {
     }
 
     onPagesClick = (e) => {
+        this.props.switchFetchingStatus(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${e.target.value}&count=${5}`)
             .then(response => {
+                this.props.switchFetchingStatus(false)
                     this.props.setUsers(response.data.items)
                 }
             )
     }
     render() {
         return <Users follow={this.follow} unfollow={this.unfollow}
-                      onPagesClick={this.onPagesClick} users={this.props.users}/>
+                      onPagesClick={this.onPagesClick} isFetching={this.props.isFetching}
+                      users={this.props.users}/>
     }
 }
 
