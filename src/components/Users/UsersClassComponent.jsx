@@ -1,31 +1,19 @@
 import React from "react";
 import * as axios from "axios";
 import Users from "./Users";
-// Зачем нам ClassComponent?
-// 1. <Users /> вызывало нашу функциональную компоненту
-// if (props.users.length === 0 ){ она отправляла запрос на сервер
-//     axios.get(`https://social-network.samuraijs.com/api/1.0/users`).then(response => {
-//             props.setUsers(response.data.items)
-//         }
-//     )
-// }
-// Что противоречит концепции чистых функций и называется сторонним эффектом(Side Effect),
-// т.е. функция "лезет" во внешний мир.
-// Путь решения проблемы:
-// Создать функцию getUsers(), button, повесить ему обработчик: по нажатию делать запрос на сервак-
-// это решение, НО пользователи нам нужны в тот момент, когда мы загрузили страницу, т.е. сразу,
-// а не после нажатия
-class UsersClassComponent extends React.Component {
+import {usersAPI} from "../../dalAPI/dalAPI";
 
+class UsersClassComponent extends React.Component {
     componentDidMount() {
         this.props.switchFetchingStatus(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${1}&count=${5}`)
-            .then(response => {
-                this.props.switchFetchingStatus(false)
-                this.props.setUsers(response.data.items)
-            }
-        )
+            usersAPI.getUsers()
+            .then(data => {
+                    this.props.switchFetchingStatus(false)
+                    this.props.setUsers(data.items)
+                }
+            )
     }
+
     follow = (id) => {
         this.props.follow(id)
     }
@@ -35,13 +23,14 @@ class UsersClassComponent extends React.Component {
 
     onPagesClick = (e) => {
         this.props.switchFetchingStatus(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${e.target.value}&count=${5}`)
-            .then(response => {
-                this.props.switchFetchingStatus(false)
-                    this.props.setUsers(response.data.items)
+        usersAPI.getUsers(e.target.value)
+            .then(data => {
+                    this.props.switchFetchingStatus(false)
+                    this.props.setUsers(data.items)
                 }
             )
     }
+
     render() {
         return <Users follow={this.follow} unfollow={this.unfollow}
                       onPagesClick={this.onPagesClick} isFetching={this.props.isFetching}
@@ -49,12 +38,4 @@ class UsersClassComponent extends React.Component {
     }
 }
 
-
-// const Usersc = (props) => {
-//     let usersElements_1 = props.users.map( u => {
-//         return <User id={u.id} name={u.name} location={u.location} status={u.status} avaURL={u.avaURL}
-//                      follow={this.follow} unfollow={this.unfollow}
-//                      followStatus={u.followStatus}/>
-//     })
-// }
 export default UsersClassComponent

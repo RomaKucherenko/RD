@@ -1,11 +1,18 @@
-.header {
+.Header {
     grid-area: h;
     background-color: black;
-  }
-  .header img {
+    border: 1px solid brown;
+}
+
+.Header img {
     width: 120px;
     height: 80px;
-  }
-  .header {
-    border:1px solid brown;
-  }
+}
+.loginBlock {
+    float: right;
+    color: white;
+}
+.loginBlock a {
+    text-decoration: none;
+    color: white;
+}

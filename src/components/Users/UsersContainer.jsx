@@ -1,5 +1,5 @@
 import React from "react";
-import {followCreator, setUsersCreator, switchFetchingStatusCreator, unfollowCreator} from "../../Redux/usersReducer";
+import {follow, setUsers, switchFetchingStatus, unfollow} from "../../Redux/usersReducer";
 import {connect} from "react-redux";
 import UsersClassComponent from "./UsersClassComponent";
 
@@ -10,25 +10,14 @@ let mapStateToProps = (state) => {
         isFetching: state.usersPage.isFetching
     }
 }
-
-let mapDispatchToProps = (dispatch) => {
-    return {
-        follow: (id) => {
-            dispatch(followCreator(id))
-        },
-        unfollow: (id) => {
-            dispatch(unfollowCreator(id) )
-        },
-        setUsers: (users) => {
-            dispatch(setUsersCreator(users))
-        },
-        switchFetchingStatus: (isFetching) => {
-            dispatch(switchFetchingStatusCreator(isFetching))
-        }
-
-    }
+//Теперь это наш mapDispatchToProps
+let objAC = {
+    follow,
+    unfollow,
+    setUsers,
+    switchFetchingStatus
 }
-
-let UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersClassComponent)
+//Если в connect приходит объект, то он автоматически его методы(cb'и) обёртывает в dispatch
+let UsersContainer = connect(mapStateToProps, objAC)(UsersClassComponent)
 
 export default UsersContainer

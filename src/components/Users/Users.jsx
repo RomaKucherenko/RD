@@ -4,21 +4,25 @@ import User from "./User/User";
 import Preloader from "../Preloader/Preloader";
 
 const Users = (props) => {
+    console.log("Users Props", props)
     let usersElements = props.users.map(u => {
         return <User id={u.id} name={u.name} status={u.status} followStatus={u.followed}
                      follow={props.follow} unfollow={props.unfollow} avatar={u.photos.small}/>
 
     })
-return <div className={s.Users}>
-    {props.isFetching ? <Preloader/> : null}
-    <div className={s.Pages} onClick={(e) => props.onPagesClick(e)}>
-        <button value={1}>1</button>
-        <button value={2}>2</button>
-        <button value={3}>3</button>
-        <button value={4}>4</button>
+    let buttons = []
+    for (let i = 1; i < 10; i++) {
+        buttons.push(<button value={i}>{i}</button>)
+    }
+
+
+    return <div className={s.Users}>
+        {props.isFetching ? <Preloader/> : null}
+        <div className={s.Pages} onClick={(e) => props.onPagesClick(e)}>
+            {buttons}
+        </div>
+        {usersElements}
     </div>
-    {usersElements}
-</div>
 
 }
 

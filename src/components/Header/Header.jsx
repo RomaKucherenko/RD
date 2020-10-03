@@ -1,11 +1,21 @@
 import React from 'react';
 import s from './Header.module.css'
 import {NavLink} from "react-router-dom";
+import HeaderImage from "../../assets/avatars/RD.jpg"
+import Preloader from "../Preloader/Preloader";
 
-const Header = () => {
+
+const Header = (props) => {
     return (
-        <header className={s.header}>
-            <NavLink to=""><img src="img/RD.jpg" alt="Иди нахуй" /></NavLink>
+        <header className={s.Header}>
+            <NavLink to="">
+                <img src={HeaderImage} alt=""/>
+            </NavLink>
+            <div className={s.loginBlock}>
+                {props.isFetching ? <Preloader/> :
+                    props.isAuth ? props.login : <a>Login</a>}
+
+            </div>
         </header>
     )
 }

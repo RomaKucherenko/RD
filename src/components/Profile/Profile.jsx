@@ -4,13 +4,11 @@ import Header from './Header/Header';
 import Me from './Me/Me';
 import PostsContainer from "./Posts/PostsContainer";
 
-const Profile = () => {
-
-    // console.log(elem.width)
+const Profile = (props) => {
     return (
-        <div className={s.profile}>
+        <div className={s.Profile}>
             <Header/>
-            <Me/>
+            <Me userProfile={props.userProfile}/>
             <PostsContainer />
         </div>
     )

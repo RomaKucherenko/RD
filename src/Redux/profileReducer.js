@@ -1,12 +1,14 @@
 const ADD_POST = `ADD-POST`;
 const UPDATE_NEW_POST_TEXT = `UPDATE-NEW-POST-TEXT`;
 const ADD_LIKE = `ADD_LIKE`;
+const SET_USER_PROFILE = `SET_USER_PROFILE`;
 
 let initialState = {
     posts: [
         {id: 1, message: "Топи, бро", likesCount: 4},
         {id: 2, message: "Ты станешь программистом!", likesCount: 5}
     ],
+    userProfile: null, //мы взяли null, чтобы потом if'ом проверить (в Me.jsx)
     newPostText: ""
 }
 
@@ -33,6 +35,12 @@ export const profileReducer = (state = initialState, action) => {
                 newPostText: action.newText
             }
         }
+        case SET_USER_PROFILE: {
+            return {
+                ...state,
+                userProfile: {...action.userProfile}
+            }
+        }
         case ADD_LIKE: {
             return {
                 ...state,
@@ -56,7 +64,8 @@ export const profileReducer = (state = initialState, action) => {
 }
 
 export const addPostCreator = () => ({type: ADD_POST})
-export const updateNewPostTextCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text})
-export const addLikeCreator = (postId) => ({type: ADD_LIKE, postId: postId})
+export const updateNewPostTextCreator = (newText) => ({type: UPDATE_NEW_POST_TEXT, newText})
+export const addLikeCreator = (postId) => ({type: ADD_LIKE, postId})
+export const setUserProfile = (userProfile) => ({type: SET_USER_PROFILE, userProfile})
 
 export default profileReducer

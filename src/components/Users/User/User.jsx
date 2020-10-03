@@ -1,18 +1,32 @@
 import React from "react";
 import s from "./../Users.module.css"
 import defaultAvatar from "./../../../assets/avatars/RD.jpg"
+import {NavLink} from "react-router-dom";
+import {followAPI} from "../../../dalAPI/dalAPI";
 
 const User = (props) => {
     const onChange = () => {
-        if (props.followStatus == true) {
-            props.unfollow(props.id)
-        } else if (props.followStatus == false) {
-            props.follow(props.id)
+        if (props.followStatus === true) {
+            followAPI.unfollow(props.id).then(resultCode => {
+                    if(resultCode === 0) {
+                        props.unfollow(props.id)
+                    }
+                }
+            )
+        } else if (props.followStatus === false) {
+            followAPI.follow(props.id).then(resultCode => {
+                    if(resultCode === 0) {
+                        props.follow(props.id)
+                    }
+                }
+            )
         }
     }
     return <div className={s.User}>
         <div>
-            <img src={props.avatar ? props.avatar : defaultAvatar}/>
+            <NavLink to={"/Profile/" + props.id}>
+                <img src={props.avatar ? props.avatar : defaultAvatar}/>
+            </NavLink>
             <button onClick={onChange} id={props.id}>
                 {props.followStatus ? `UNFOLLOW` : `FOLLOW`}
             </button>

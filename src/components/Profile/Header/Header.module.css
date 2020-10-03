@@ -1,9 +1,9 @@
 .Header{
     margin: 0 auto;
     border:1px solid darkblue;
-    grid-area: pH;
+    grid-area: H;
 }
 img {
     width: 1000px;
-    height: 400px;
+    height: 350px;
 }
