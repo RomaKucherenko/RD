@@ -2,6 +2,7 @@ import React from 'react'
 import s from './Dialogs.module.css'
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
+import Redirect from "react-router-dom/es/Redirect";
 
 const Dialogs = (props) => {
     /*Т.Е. Я для каждого элемента массива диалогов должен создать компоненту и в пропсы закинуть свойство

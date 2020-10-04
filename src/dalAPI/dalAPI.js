@@ -46,12 +46,6 @@ export const followAPI = {
     follow(id) {
         return instance.followInstance.post(`${id}`)
             .then(response => response.data.resultCode)
-        // axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`,{},{
-        //     withCredentials: true,
-        //     headers:{
-        //         "API-KEY": "31496dd4-dfd5-4991-a785-9c28daa3f4bc"
-        //     }
-        // }
     }
 }
 export const profileAPI = {

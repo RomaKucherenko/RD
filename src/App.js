@@ -7,6 +7,7 @@ import UsersContainer from "./components/Users/UsersContainer";
 import News from "./components/News/News";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import Login from "./components/Login/Login";
 
 
 // Возвращает JSX разметку - Функциональная Компонента
@@ -22,6 +23,7 @@ function App() {
                 т.е., Route отрисует Profile, если userId не передан*/}
                 <Route path="/Users" render={() => <UsersContainer />}/>
                 <Route path="/News" render={() => <News />}/>
+                <Route path="/Login" render={() => <Login />}/>
             </div>
         </div>
     )

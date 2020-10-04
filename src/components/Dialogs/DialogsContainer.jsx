@@ -2,6 +2,8 @@ import React from 'react'
 import {addNewMessageCreator, updateNewMessageTextCreator} from "../../Redux/dialogsReducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
+import WithAuthRedirect from "../Hoc/withAuthRedirect";
+import {compose} from "redux";
 
 
 let mapStateToProps = (state) => {
@@ -26,6 +28,13 @@ let mapDispatchToProps = (dispatch) => {
 //В первый вызов connect передаётся две функции и всё что они вернут
 //попадёт в ! props !
 //Во второй вызов передаем компоненту, которую хотим обернуть в контейнер
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+//Раньше у нас было вот так
+// let withAuthDialogs = WithAuthRedirect(Dialogs)
+// const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(withAuthDialogs)
 
-export default DialogsContainer
+let DialogsCompose = compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    WithAuthRedirect
+)(Dialogs)
+
+export default DialogsCompose

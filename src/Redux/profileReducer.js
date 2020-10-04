@@ -72,21 +72,10 @@ export const setUserProfile = (userProfile) => ({type: SET_USER_PROFILE, userPro
 
 export const setUser = (userId) => {
     return (dispatch) => {
-        !userId ?
-            authAPI.authAttempt().then(data => {
-                    if (data.resultCode === 0) {
-                        let {id} = data.data
-                        profileAPI.getProfile(id).then(userData => {
-                                dispatch(setUserProfile(userData))
-                            }
-                        )
-                    }
-                }
-            ):
-            profileAPI.getProfile(userId).then(data => {
-                    dispatch(setUserProfile(data))
-                }
-            )
+        profileAPI.getProfile(userId).then(data => {
+                dispatch(setUserProfile(data))
+            }
+        )
     }
 }
 
