@@ -1,3 +1,5 @@
+import {authAPI} from "../dalAPI/dalAPI";
+
 const SWITCH_FETCHING_STATUS = `SWITCH_FETCHING_STATUS`
 const SET_USER_DATA = `SET_USER_DATA`
 
@@ -32,7 +34,21 @@ const usersReducer = (state = initialState, action) => {
 
 
 export const switchFetchingStatus = (isFetching) => ({type: SWITCH_FETCHING_STATUS, isFetching})
-export const setUserData = (userId, login) => ({type: SET_USER_DATA, userData:{userId, login}})
+export const setUserDataAction = (userId, login) => ({type: SET_USER_DATA, userData:{userId, login}})
+
+export const setUserData = () => {
+    return (dispatch) => {
+        dispatch(switchFetchingStatus(true))
+        authAPI.authAttempt().then(data => {
+                if (data.resultCode === 0) {
+                    let {id, login} = data.data
+                    dispatch(setUserDataAction(id, login))
+                }
+                dispatch(switchFetchingStatus(false))
+            }
+        )
+    }
+}
 
 
 export default usersReducer

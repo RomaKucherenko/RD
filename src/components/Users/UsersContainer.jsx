@@ -1,5 +1,5 @@
 import React from "react";
-import {follow, setUsers, switchFetchingStatus, unfollow} from "../../Redux/usersReducer";
+import {follow, getUsers, switchFetchingStatus, switchFollowingProgress, unfollow} from "../../Redux/usersReducer";
 import {connect} from "react-redux";
 import UsersClassComponent from "./UsersClassComponent";
 
@@ -7,15 +7,17 @@ import UsersClassComponent from "./UsersClassComponent";
 let mapStateToProps = (state) => {
     return {
         users: state.usersPage.users,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        usersInFollowingProgress: state.usersPage.usersInFollowingProgress
     }
 }
 //Теперь это наш mapDispatchToProps
 let objAC = {
     follow,
     unfollow,
-    setUsers,
-    switchFetchingStatus
+    getUsers,
+    switchFetchingStatus,
+    switchFollowingProgress
 }
 //Если в connect приходит объект, то он автоматически его методы(cb'и) обёртывает в dispatch
 let UsersContainer = connect(mapStateToProps, objAC)(UsersClassComponent)

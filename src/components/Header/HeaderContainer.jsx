@@ -2,21 +2,12 @@ import React from 'react';
 import s from './Header.module.css'
 import Header from "./Header";
 import {connect} from "react-redux";
-import {setUserData, switchFetchingStatus} from "../../Redux/authReducer";
-import {authAPI} from "../../dalAPI/dalAPI";
+import {setUserData} from "../../Redux/authReducer";
 
 
 class HeaderClassComponent extends React.Component {
     componentDidMount() {
-        this.props.switchFetchingStatus(true)
-        authAPI.authAttempt().then(data => {
-                if (data.resultCode === 0) {
-                    let {id, login} = data.data
-                    this.props.setUserData(id, login)
-                }
-                this.props.switchFetchingStatus(false)
-            }
-        )
+        this.props.setUserData()
     }
 
     render() {
@@ -30,7 +21,6 @@ const mapStateToProps = (state) => {
     }
 }
 let objAC = {
-    setUserData,
-    switchFetchingStatus
+    setUserData
 }
 export default connect(mapStateToProps, objAC)(HeaderClassComponent)

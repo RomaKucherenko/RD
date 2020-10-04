@@ -28,6 +28,7 @@ let mapDispatchToProps = (dispatch) => {
 let PostsContainer = connect(mapStateToProps, mapDispatchToProps)(Posts)
 //Мы удалили rerenderEntireTree() потому что connect возвращает компоненту, которая имеет свой локальный
 //subcribe.
-// Это удобно, тк она сама решает нужно ли ей перерисовываться или нет и перерисовывается ТОЛЬКО ОНА, А НЕ ВСЁ ДЕРЕВО
+// Это удобно, тк она сама решает нужно ли ей перерисовываться или нет и перерисовывается
+// ТОЛЬКО ОНА, А НЕ ВСЁ ДЕРЕВО
 
 export default PostsContainer

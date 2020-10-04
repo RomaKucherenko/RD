@@ -7,19 +7,9 @@ import {followAPI} from "../../../dalAPI/dalAPI";
 const User = (props) => {
     const onChange = () => {
         if (props.followStatus === true) {
-            followAPI.unfollow(props.id).then(resultCode => {
-                    if(resultCode === 0) {
-                        props.unfollow(props.id)
-                    }
-                }
-            )
+            props.unfollow(props.id)
         } else if (props.followStatus === false) {
-            followAPI.follow(props.id).then(resultCode => {
-                    if(resultCode === 0) {
-                        props.follow(props.id)
-                    }
-                }
-            )
+            props.follow(props.id)
         }
     }
     return <div className={s.User}>
@@ -27,7 +17,8 @@ const User = (props) => {
             <NavLink to={"/Profile/" + props.id}>
                 <img src={props.avatar ? props.avatar : defaultAvatar}/>
             </NavLink>
-            <button onClick={onChange} id={props.id}>
+            <button onClick={onChange} id={props.id}
+                    disabled={props.usersInFollowingProgress.some(id => id == props.id)}>
                 {props.followStatus ? `UNFOLLOW` : `FOLLOW`}
             </button>
         </div>

@@ -1,17 +1,9 @@
 import React from "react";
-import * as axios from "axios";
 import Users from "./Users";
-import {usersAPI} from "../../dalAPI/dalAPI";
 
 class UsersClassComponent extends React.Component {
     componentDidMount() {
-        this.props.switchFetchingStatus(true)
-            usersAPI.getUsers()
-            .then(data => {
-                    this.props.switchFetchingStatus(false)
-                    this.props.setUsers(data.items)
-                }
-            )
+        this.props.getUsers()
     }
 
     follow = (id) => {
@@ -22,19 +14,12 @@ class UsersClassComponent extends React.Component {
     }
 
     onPagesClick = (e) => {
-        this.props.switchFetchingStatus(true)
-        usersAPI.getUsers(e.target.value)
-            .then(data => {
-                    this.props.switchFetchingStatus(false)
-                    this.props.setUsers(data.items)
-                }
-            )
+        this.props.getUsers(e.target.value)
     }
 
     render() {
         return <Users follow={this.follow} unfollow={this.unfollow}
-                      onPagesClick={this.onPagesClick} isFetching={this.props.isFetching}
-                      users={this.props.users}/>
+                      onPagesClick={this.onPagesClick} {...this.props}/>
     }
 }
 

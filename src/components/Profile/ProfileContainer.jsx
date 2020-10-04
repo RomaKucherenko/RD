@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {setUserProfile} from "../../Redux/profileReducer";
+import {setUser} from "../../Redux/profileReducer";
 import ProfileClassComponent from "./ProfileClassComponent";
 import {withRouter} from "react-router-dom";
 
@@ -10,7 +10,7 @@ let mapStateToProps = (state) => {
     }
 }
 let objAC = {
-    setUserProfile
+    setUser
 }
 
 let WithRouterProfileClassComponent = withRouter(ProfileClassComponent)

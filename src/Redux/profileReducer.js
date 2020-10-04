@@ -1,3 +1,5 @@
+import {authAPI, profileAPI} from "../dalAPI/dalAPI";
+
 const ADD_POST = `ADD-POST`;
 const UPDATE_NEW_POST_TEXT = `UPDATE-NEW-POST-TEXT`;
 const ADD_LIKE = `ADD_LIKE`;
@@ -67,5 +69,25 @@ export const addPostCreator = () => ({type: ADD_POST})
 export const updateNewPostTextCreator = (newText) => ({type: UPDATE_NEW_POST_TEXT, newText})
 export const addLikeCreator = (postId) => ({type: ADD_LIKE, postId})
 export const setUserProfile = (userProfile) => ({type: SET_USER_PROFILE, userProfile})
+
+export const setUser = (userId) => {
+    return (dispatch) => {
+        !userId ?
+            authAPI.authAttempt().then(data => {
+                    if (data.resultCode === 0) {
+                        let {id} = data.data
+                        profileAPI.getProfile(id).then(userData => {
+                                dispatch(setUserProfile(userData))
+                            }
+                        )
+                    }
+                }
+            ):
+            profileAPI.getProfile(userId).then(data => {
+                    dispatch(setUserProfile(data))
+                }
+            )
+    }
+}
 
 export default profileReducer
