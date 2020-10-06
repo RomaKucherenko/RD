@@ -1,14 +1,16 @@
 import React from 'react';
 import s from './Profile.module.css'
 import Header from './Header/Header';
-import Me from './Me/Me';
 import PostsContainer from "./Posts/PostsContainer";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {updateStatus} from "../../Redux/profileReducer";
 
 const Profile = (props) => {
     return (
         <div className={s.Profile}>
             <Header/>
-            <Me userProfile={props.userProfile}/>
+            <ProfileInfo userProfile={props.userProfile} status={props.status}
+                         updateStatus={props.updateStatus}/>
             <PostsContainer />
         </div>
     )

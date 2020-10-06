@@ -5,7 +5,6 @@ import Preloader from "../Preloader/Preloader";
 import {switchFollowingProgress} from "../../Redux/usersReducer";
 
 const Users = (props) => {
-    console.log("Users Props", props)
     let usersElements = props.users.map(u => {
         return <User id={u.id} name={u.name} status={u.status} followStatus={u.followed}
                      follow={props.follow} unfollow={props.unfollow} avatar={u.photos.small}

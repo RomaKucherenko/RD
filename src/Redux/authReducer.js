@@ -41,6 +41,7 @@ export const setUserData = () => {
         dispatch(switchAuthFetchingStatus(true))
         authAPI.authAttempt().then(data => {
                 if (data.resultCode === 0) {
+                    console.log(`Я авторизовался`)
                     let {id, login} = data.data
                     dispatch(setUserDataAction(id, login))
                 }

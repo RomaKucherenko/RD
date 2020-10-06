@@ -7,7 +7,7 @@ import {setUserData} from "../../Redux/authReducer";
 
 class HeaderClassComponent extends React.Component {
     componentDidMount() {
-        //this.props.setUserData()
+        this.props.setUserData()
     }
 
     render() {
