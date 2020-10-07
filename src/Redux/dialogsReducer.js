@@ -15,8 +15,7 @@ let initialState = {
         {id: 3, name: 'Sasha', path: "./img/avatars/foto_1.jpg"},
         {id: 4, name: 'Igor', path: "./img/avatars/foto_1.jpg"},
         {id: 5, name: 'Danya', path: "./img/avatars/foto_1.jpg"}
-    ],
-    newMessageText: ``
+    ]
 }
 
 const dialogsReducer = (state = initialState, action) => {
@@ -25,23 +24,15 @@ const dialogsReducer = (state = initialState, action) => {
     //чтобы изменить STATE. Subscriber должен следить за этим изменением
     switch (action.type) {
         case SEND_MESSAGE: {
-            let text = state.newMessageText
+            let text = action.newMessageText
             let newMessage = {
                 id: 6,
                 message: text,
                 path: "./img/avatars/foto_1.jpg"
             }
-            debugger
             return  {
                 ...state,
-                newMessageText : "",
                 messages: [...state.messages, newMessage]
-            }
-        }
-        case UPDATE_NEW_MESSAGE_TEXT: {
-            return {
-                ...state,
-                newMessageText: action.newMessageText
             }
         }
         default:
@@ -49,8 +40,7 @@ const dialogsReducer = (state = initialState, action) => {
     }
 }
 
-export const addNewMessageCreator = () => ({type: SEND_MESSAGE})
-export const updateNewMessageTextCreator = (text) => ({type: UPDATE_NEW_MESSAGE_TEXT, newMessageText: text})
+export const addNewMessageCreator = (newMessageText) => ({type: SEND_MESSAGE, newMessageText})
 
 
 export default dialogsReducer

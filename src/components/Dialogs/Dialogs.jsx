@@ -2,7 +2,7 @@ import React from 'react'
 import s from './Dialogs.module.css'
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
-import Redirect from "react-router-dom/es/Redirect";
+import AddMessageReduxForm from "./AddMessageForm";
 
 const Dialogs = (props) => {
     /*Т.Е. Я для каждого элемента массива диалогов должен создать компоненту и в пропсы закинуть свойство
@@ -24,16 +24,9 @@ const Dialogs = (props) => {
             side={sideSelector(index, s.right, s.left)} src={message.path}
         />
     )
-    let onAddMessage = () => {
-        props.addMessage()
+    const addMessage = (data) => {
+        props.addMessage(data.addMessageText)
     }
-    let onTextChange = (e) => {
-        //Когда происходит событие, браузер создаёт объект события,
-        // записывает в него детали и передаёт его в качестве аргумента функции-обработчику
-        let txt = e.target.value
-        props.updateNewMessageText(txt)
-    }
-
     return (
         <div className={s.Dialogs}>
             <div className={s.DialogsItems}>
@@ -42,9 +35,7 @@ const Dialogs = (props) => {
             <div className={s.Messages}>
                 <div>{messagesElements}</div>
                 <div>
-                    <textarea onChange={onTextChange} placeholder="Введите ваше сообщение"
-                              value={props.dialogsPage.newMessageText}/>
-                    <button onClick={onAddMessage}>Отправить сообщение</button>
+                   <AddMessageReduxForm onSubmit={addMessage} />
                 </div>
             </div>
         </div>

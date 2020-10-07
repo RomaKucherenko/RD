@@ -1,6 +1,7 @@
 import React from 'react'
 import s from './Posts.module.css'
 import Post from './Post/Post'
+import PostReduxForm from "./PostForm";
 
 
 const Posts = (props) => {
@@ -9,27 +10,14 @@ const Posts = (props) => {
                       addLike={props.addLike}/>
     )
 
-    let onAddPost = () => {
-        props.addPost()
+    let addPost = (data) => {
+       props.addPost(data.postText)
     }
-    let onChangeText = (e) => {
-        let text = e.target.value
-        props.updateNewPostText(text)
-    }
-
     return (
         <div className={s.Posts}>
             <h3>Posts</h3>
             <div className={s.NewPost}>
-                <div>
-                    <textarea placeholder="Введите текст вашего поста"
-                              value={props.profilePage.newPostText}
-                              onChange={onChangeText}/>
-                </div>
-                <div>
-                    <button onClick={onAddPost}>Add post</button>
-                </div>
-
+                <PostReduxForm onSubmit={addPost}/>
             </div>
             <div className={s.PostsList}>
                 {postsElements}
