@@ -2,12 +2,12 @@ import React from 'react';
 import s from './Header.module.css'
 import Header from "./Header";
 import {connect} from "react-redux";
-import {setUserData} from "../../Redux/authReducer";
+import {authAttempt, logout} from "../../Redux/authReducer";
 
 
 class HeaderClassComponent extends React.Component {
     componentDidMount() {
-        this.props.setUserData()
+        this.props.authAttempt()
     }
 
     render() {
@@ -21,6 +21,7 @@ const mapStateToProps = (state) => {
     }
 }
 let objAC = {
-    setUserData
+    authAttempt,
+    logout
 }
 export default connect(mapStateToProps, objAC)(HeaderClassComponent)

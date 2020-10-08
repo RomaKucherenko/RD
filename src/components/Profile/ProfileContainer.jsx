@@ -5,6 +5,7 @@ import ProfileClassComponent from "./ProfileClassComponent";
 import {withRouter} from "react-router-dom";
 import WithAuthRedirect from "../Hoc/withAuthRedirect";
 import {compose} from "redux";
+import withProfileRedirect from "../Hoc/withProfileRedirect";
 
 let mapStateToProps = (state) => {
     return {
@@ -26,7 +27,8 @@ let objAC = {
 
 let ProfileCompose = compose(
     connect(mapStateToProps, objAC),
-    withRouter
+    withRouter,
+    withProfileRedirect
 )(ProfileClassComponent)
 
 export default ProfileCompose

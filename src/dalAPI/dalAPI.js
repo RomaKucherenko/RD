@@ -22,6 +22,20 @@ export const authAPI = {
             .then(response => {
                 return response.data
             })
+    },
+    login(email, password, rememberMe) {
+        return instance.post(`auth/login`, {
+            email, password, rememberMe
+        }).then(response => {
+                return response.data
+            }
+        )
+    },
+    logout() {
+        return instance.delete(`auth/login`).then(response => {
+                return response.data
+            }
+        )
     }
 }
 export const followAPI = {
@@ -45,6 +59,6 @@ export const profileAPI = {
     },
     getStatus(id) {
         return instance.get(`/profile/status/${id}`)
-            .then(response =>response.data)
+            .then(response => response.data)
     }
 }

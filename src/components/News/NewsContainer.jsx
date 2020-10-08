@@ -2,6 +2,7 @@ import React from "react";
 import {addNews} from "../../Redux/newsReducer";
 import {connect} from "react-redux";
 import News from "./News";
+import {compose} from "redux";
 
 let mapStateToProps = (state) => {
     return {
@@ -11,7 +12,9 @@ let mapStateToProps = (state) => {
 let dispatchObj = {
     addNews
 }
+let NewsCompose = compose(
+    connect(mapStateToProps, dispatchObj)
+)(News)
 
-const NewsContainer = connect(mapStateToProps, dispatchObj)(News)
 
-export default NewsContainer
+export default NewsCompose

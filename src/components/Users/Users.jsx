@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./Users.module.css"
 import User from "./User/User";
-import Preloader from "../Preloader/Preloader";
+import Preloader from "../common/Preloader/Preloader";
 import {switchFollowingProgress} from "../../Redux/usersReducer";
 
 const Users = (props) => {

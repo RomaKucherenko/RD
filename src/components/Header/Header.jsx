@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Header.module.css'
 import {NavLink} from "react-router-dom";
 import HeaderImage from "../../assets/avatars/RD.jpg"
-import Preloader from "../Preloader/Preloader";
+import Preloader from "../common/Preloader/Preloader";
 
 
 const Header = (props) => {
@@ -13,7 +13,12 @@ const Header = (props) => {
             </NavLink>
             <div className={s.loginBlock}>
                 {props.isFetching ? <Preloader/> :
-                    props.isAuth ? props.login : <a>Login</a>}
+                    props.isAuth ?
+                        <div>
+                            {props.login}
+                            <button onClick={props.logout}>LogOut</button>
+                        </div>
+                        : <NavLink to="/Login">Login</NavLink>}
 
             </div>
         </header>

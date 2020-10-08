@@ -1,6 +1,6 @@
 import React from 'react'
 import s from './ProfileInfo.module.css'
-import Preloader from "../../Preloader/Preloader";
+import Preloader from "../../common/Preloader/Preloader";
 import defaultAvatar from "../../../assets/avatars/RD.jpg"
 import ProfileStatus from "./ProfileStatus";
 import {updateStatus} from "../../../Redux/profileReducer";

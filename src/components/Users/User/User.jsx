@@ -2,7 +2,6 @@ import React from "react";
 import s from "./../Users.module.css"
 import defaultAvatar from "./../../../assets/avatars/RD.jpg"
 import {NavLink} from "react-router-dom";
-import {followAPI} from "../../../dalAPI/dalAPI";
 
 const User = (props) => {
     const onChange = () => {

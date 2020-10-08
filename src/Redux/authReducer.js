@@ -20,7 +20,7 @@ const usersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.userData,
-                isAuth: true
+                isAuth: action.isAuth
             }
         case SWITCH_AUTH_FETCHING_STATUS:
             return {
@@ -34,22 +34,48 @@ const usersReducer = (state = initialState, action) => {
 
 
 export const switchAuthFetchingStatus = (isFetching) => ({type: SWITCH_AUTH_FETCHING_STATUS, isFetching})
-export const setUserDataAction = (userId, login) => ({type: SET_USER_DATA, userData:{userId, login}})
+export const setUserDataAction = (userId, login, isAuth) => ({type: SET_USER_DATA, userData: {userId, login}, isAuth})
 
-export const setUserData = () => {
+export const authAttempt = () => {
     return (dispatch) => {
         dispatch(switchAuthFetchingStatus(true))
         authAPI.authAttempt().then(data => {
                 if (data.resultCode === 0) {
-                    console.log(`Я авторизовался`)
                     let {id, login} = data.data
-                    dispatch(setUserDataAction(id, login))
+                    dispatch(setUserDataAction(id, login, true))
                 }
                 dispatch(switchAuthFetchingStatus(false))
             }
         )
     }
 }
-
-
+export const login = (email, password, rememberMe) => {
+    return dispatch => {
+        dispatch(switchAuthFetchingStatus(true))
+        authAPI.login(email, password, rememberMe).then(response => {
+            if (response.resultCode === 0) {
+                authAPI.authAttempt().then(data => {
+                    if (data.resultCode === 0) {
+                        let {id, login} = data.data
+                        dispatch(setUserDataAction(id, login, true))
+                    }
+                })
+            }
+            dispatch(switchAuthFetchingStatus(false))
+            }
+        )
+    }
+}
+export const logout = () => {
+    return dispatch => {
+        dispatch(switchAuthFetchingStatus(true))
+        authAPI.logout().then(response => {
+            if (response.resultCode === 0) {
+                dispatch(setUserDataAction(null, null, false))
+            }
+            dispatch(switchAuthFetchingStatus(false))
+            }
+        )
+    }
+}
 export default usersReducer
