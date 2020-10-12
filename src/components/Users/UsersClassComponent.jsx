@@ -1,10 +1,9 @@
 import React from "react";
 import Users from "./Users";
-import Redirect from "react-router-dom/es/Redirect";
 
 class UsersClassComponent extends React.Component {
     componentDidMount() {
-        this.props.getUsers()
+        this.props.requestUsers()
     }
 
     follow = (id) => {
@@ -15,7 +14,7 @@ class UsersClassComponent extends React.Component {
     }
 
     onPagesClick = (e) => {
-        this.props.getUsers(e.target.value)
+        this.props.requestUsers(e.target.value)
     }
 
     render() {

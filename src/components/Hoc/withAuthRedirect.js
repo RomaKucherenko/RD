@@ -10,8 +10,14 @@ let mapStateToProps = (state) => {
 
 const WithAuthRedirect = (Component) => {
     class AuthContainer extends React.Component{
+        componentDidMount() {
+            console.log(`authHOC DM`)
+        }
+
         render() {
-            //console.log(`Я инициализировался`)
+            console.log(`authHOC render`)
+            // console.log(`this.props:`,this.props)
+            // console.log(`Component:`, Component)
             if (!this.props.isAuth) return <Redirect to="/Login"/>
             return <Component {...this.props}/>
         }

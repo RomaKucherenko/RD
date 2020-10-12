@@ -6,10 +6,6 @@ import {authAttempt, logout} from "../../Redux/authReducer";
 
 
 class HeaderClassComponent extends React.Component {
-    componentDidMount() {
-        this.props.authAttempt()
-    }
-
     render() {
         return <Header{...this.props}/>
     }
@@ -21,7 +17,6 @@ const mapStateToProps = (state) => {
     }
 }
 let objAC = {
-    authAttempt,
     logout
 }
 export default connect(mapStateToProps, objAC)(HeaderClassComponent)

@@ -80,7 +80,7 @@ export const setPageNumber = (pageNumber) => ({type: SET_PAGE_NUMBER, pageNumber
 export const switchFetchingStatus = (isFetching) => ({type: SWITCH_FETCHING_STATUS, isFetching})
 export const switchFollowingProgress = (isFollowing, userId) => ({type: SWITCH_FOLLOWING_PROGRESS, isFollowing, userId})
 
-export const getUsers = (pageNumber = 1) => {
+export const requestUsers = (pageNumber = 1) => {
     return (dispatch) => {
         dispatch(switchFetchingStatus(true))
         usersAPI.getUsers(pageNumber)

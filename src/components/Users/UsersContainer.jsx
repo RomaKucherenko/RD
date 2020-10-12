@@ -1,23 +1,24 @@
 import React from "react";
-import {follow, getUsers, switchFetchingStatus, switchFollowingProgress, unfollow} from "../../Redux/usersReducer";
+import {follow, requestUsers, switchFetchingStatus, switchFollowingProgress, unfollow} from "../../Redux/usersReducer";
 import {connect} from "react-redux";
 import UsersClassComponent from "./UsersClassComponent";
 import WithAuthRedirect from "../Hoc/withAuthRedirect";
 import {compose} from "redux";
+import {getIsFetching, getUsers, getUsersInFollowingProgress} from "../../Redux/Selectors/usersSelector";
 
 //Этот контейнер нам нужен для общения со Store
 let mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users,
-        isFetching: state.usersPage.isFetching,
-        usersInFollowingProgress: state.usersPage.usersInFollowingProgress
+        users: getUsers(state),
+        isFetching: getIsFetching(state),
+        usersInFollowingProgress: getUsersInFollowingProgress(state)
     }
 }
 //Теперь это наш mapDispatchToProps
 let objAC = {
     follow,
     unfollow,
-    getUsers,
+    requestUsers,
     switchFetchingStatus,
     switchFollowingProgress
 }
