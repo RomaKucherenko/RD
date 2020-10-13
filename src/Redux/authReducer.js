@@ -12,7 +12,6 @@ let initialState = {
 }
 
 const authReducer = (state = initialState, action) => {
-
     //Reducer только изменяет STATE, вызывать callSubscriber
     //мы не будем, тк это не наша responsibility, наша только в том
     //чтобы изменить STATE. Subscriber должен следить за этим изменением

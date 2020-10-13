@@ -83,7 +83,7 @@ export const switchFollowingProgress = (isFollowing, userId) => ({type: SWITCH_F
 export const requestUsers = (pageNumber = 1) => {
     return (dispatch) => {
         dispatch(switchFetchingStatus(true))
-        usersAPI.getUsers(pageNumber)
+        usersAPI.requestUsers(pageNumber)
             .then(data => {
                     dispatch(switchFetchingStatus(false))
                     dispatch(setUsers(data.items))

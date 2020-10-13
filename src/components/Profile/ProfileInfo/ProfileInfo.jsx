@@ -4,6 +4,7 @@ import Preloader from "../../common/Preloader/Preloader";
 import defaultAvatar from "../../../assets/avatars/RD.jpg"
 import ProfileStatus from "./ProfileStatus";
 import {updateStatus} from "../../../Redux/profileReducer";
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 const ProfileInfo = (props) => {
     if (!props.userProfile) {
@@ -17,7 +18,8 @@ const ProfileInfo = (props) => {
             </div>
             <div className={s.Description}>
                 <div>{props.userProfile.fullName}</div>
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
+                {/*<ProfileStatus status={props.status} updateStatus={props.updateStatus}/>*/}
             </div>
         </div>
     )

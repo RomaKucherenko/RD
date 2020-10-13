@@ -80,6 +80,7 @@ export const setUser = (userId) => {
     }
 }
 export const updateStatus = (status) => {
+    //Можно сделать логику, которая будет смотреть а стоит ли на post статус, изменился ли он
     return (dispatch) => {
         profileAPI.updateStatus(status).then(resultCode => {
                 if (resultCode === 0) {

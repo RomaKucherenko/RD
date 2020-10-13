@@ -13,6 +13,7 @@ import {connect} from "react-redux";
 import {initializeApp} from "./Redux/appReducer";
 import {compose} from "redux";
 import Preloader from "./components/common/Preloader/Preloader";
+import Test from "./components/Test/Test";
 
 
 // Возвращает JSX разметку - Функциональная Компонента
@@ -20,13 +21,14 @@ class App extends React.Component {
     componentDidMount() {
         //Что я хочу?
         //При переходе на rd.сom приложение isAuth ? rd.сom/News : rd.сom/Login
-        //А сейчас получается так, что App даже не рендерится, что не позволяет нам настроить Routы
+
+        //+- пофиксил, но сейчас в ЛЮБОМ СЛУЧАЕ присутствует мерцание, потому что Login подгружается
+        //ВСЕГДА
+
         this.props.initializeApp()
-        console.log(`App DidMount`)
     }
 
     render() {
-        console.log(`App Render`, this.props)
         if (this.props.isAuth) {
             if (!this.props.isInitialized) {
                 return <Preloader/>
@@ -43,6 +45,7 @@ class App extends React.Component {
                         <Route path="/Users" render={() => <UsersContainer/>}/>
                         <Route path="/News" render={() => <NewsContainer/>}/>
                         <Route path="/Login" render={() => <Login/>}/>
+                        <Route path="/Test" render={() => <Test/>}/>
                     </div>
                 </div>
             )

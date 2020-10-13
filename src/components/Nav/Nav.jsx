@@ -22,6 +22,9 @@ const Nav = () => {
                 <NavLink to="/News" activeClassName={s.active}>News</NavLink>
             </div>
             <div className={s.item}>
+                <NavLink to="/Test" activeClassName={s.active}>Test</NavLink>
+            </div>
+            <div className={s.item}>
                 <a>Music</a>
             </div>
 

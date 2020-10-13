@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import UsersClassComponent from "./UsersClassComponent";
 import WithAuthRedirect from "../Hoc/withAuthRedirect";
 import {compose} from "redux";
-import {getIsFetching, getUsers, getUsersInFollowingProgress} from "../../Redux/Selectors/usersSelector";
+import { getIsFetching, getUsers, getUsersInFollowingProgress,} from "../../Redux/Selectors/usersSelector";
 
 //Этот контейнер нам нужен для общения со Store
 let mapStateToProps = (state) => {

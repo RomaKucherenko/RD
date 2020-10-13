@@ -7,6 +7,7 @@ import App from "./App";
 import {Provider} from "react-redux";
 
 
+
 //Document Object Model, сокращённо DOM – объектная модель документа,
 // которая представляет все содержимое страницы в виде объектов,
 // которые можно менять.
