@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from "react";
+import {subscribe, unsubscribe} from "./TestApi";
 
 const Test = (props) => {
     console.log(`Test`)
     const [count, setCount] = useState(0);
 
     useEffect(() => {
-        // setTimeout(() => {
-        //     console.log(`You clicked ${count} times`);
-        // }, 3000);
         console.log(`You clicked ${count} times`)
+        subscribe()
+        return _ => unsubscribe()
     });
 
     return (

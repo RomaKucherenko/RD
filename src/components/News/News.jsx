@@ -15,7 +15,6 @@ class News extends React.Component {
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props != prevProps){
-            console.log(this.props)
             this.setState({
                 stateNewsElements: this.props.news.map(n => <span>{n}</span>)
             })
@@ -23,7 +22,6 @@ class News extends React.Component {
     }
 
     render() {
-        console.log(`render`)
         return <div>
             State:
             {this.state.stateNewsElements}

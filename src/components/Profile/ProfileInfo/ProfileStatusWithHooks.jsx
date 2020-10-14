@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
+import s from "./ProfileInfo.module.css"
 
 const ProfileStatusWithHooks = (props) => {
-
     let [editMode, setEditMode] = useState(false)
     let [status, setStatus] = useState(props.status)
     const [count, setCount] = useState(0);
@@ -30,5 +30,5 @@ const ProfileStatusWithHooks = (props) => {
     </div>
 
 }
-
-export default ProfileStatusWithHooks
+//Обёртываем её для того чтобы производился lifeCycleMethod sCU
+export default React.memo(ProfileStatusWithHooks)
