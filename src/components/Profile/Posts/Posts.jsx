@@ -8,7 +8,7 @@ const Posts = props => {
     let postsElements = [...props.profilePage.posts]
         .reverse()
         .map(
-        post => <Post id={post.id} message={post.message} likesCount={post.likesCount}
+        post => <Post key={post.id} id={post.id} message={post.message} likesCount={post.likesCount}
                       addLike={props.addLike}/>
     )
 

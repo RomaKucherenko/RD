@@ -1,8 +1,8 @@
 import {authAPI} from "../dalAPI/dalAPI";
 import {stopSubmit} from "redux-form";
 
-const SWITCH_AUTH_FETCHING_STATUS = `SWITCH_AUTH_FETCHING_STATUS`
-const SET_USER_DATA = `SET_USER_DATA`
+const SWITCH_AUTH_FETCHING_STATUS = `auth/WITCH_AUTH_FETCHING_STATUS`
+const SET_USER_DATA = `auth/SET_USER_DATA`
 
 let initialState = {
     userId: null,
@@ -36,40 +36,32 @@ const authReducer = (state = initialState, action) => {
 export const switchAuthFetchingStatus = (isFetching) => ({type: SWITCH_AUTH_FETCHING_STATUS, isFetching})
 export const setUserDataAction = (userId, login, isAuth) => ({type: SET_USER_DATA, userData: {userId, login}, isAuth})
 
-export const authAttempt = () => (dispatch) => {
-    //return промис который возвращает then
-    return authAPI.authAttempt().then(data => {
-            if (data.resultCode === 0) {
-                let {id, login} = data.data
-                dispatch(setUserDataAction(id, login, true))
-            }
-        }
-    )
-}
-export const login = (email, password, rememberMe) => {
-    return dispatch => {
-        dispatch(switchAuthFetchingStatus(true))
-        authAPI.login(email, password, rememberMe).then(response => {
-                if (response.resultCode === 0) {
-                    dispatch(authAttempt())
-                } else {
-                    dispatch(stopSubmit('login', {_error: response.messages[0]}))
-                }
-                dispatch(switchAuthFetchingStatus(false))
-            }
-        )
+export const authAttempt = () => async (dispatch) => {
+    //async возвращает promise
+    let data = await authAPI.authAttempt()
+    if (data.resultCode === 0) {
+        let {id, login} = data.data
+        dispatch(setUserDataAction(id, login, true))
     }
 }
-export const logout = () => {
-    return dispatch => {
-        dispatch(switchAuthFetchingStatus(true))
-        authAPI.logout().then(response => {
-                if (response.resultCode === 0) {
-                    dispatch(setUserDataAction(null, null, false))
-                }
-                dispatch(switchAuthFetchingStatus(false))
-            }
-        )
+export const login = (email, password, rememberMe) => async (dispatch) => {
+    dispatch(switchAuthFetchingStatus(true))
+    let response = await authAPI.login(email, password, rememberMe)
+    if (response.resultCode === 0) {
+        dispatch(authAttempt())
+    } else {
+        dispatch(stopSubmit('login', {_error: response.messages[0]}))
     }
+    dispatch(switchAuthFetchingStatus(false))
+
+}
+export const logout = () => async (dispatch) => {
+    dispatch(switchAuthFetchingStatus(true))
+    let response = await authAPI.logout()
+    if (response.resultCode === 0) {
+        dispatch(setUserDataAction(null, null, false))
+    }
+    dispatch(switchAuthFetchingStatus(false))
+
 }
 export default authReducer

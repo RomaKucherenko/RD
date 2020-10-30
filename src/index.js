@@ -1,10 +1,7 @@
 import * as serviceWorker from './serviceWorker';
-import store from "./Redux/reduxStore";
 import ReactDOM from "react-dom";
-import {BrowserRouter} from "react-router-dom";
 import React from "react";
-import App from "./App";
-import {Provider} from "react-redux";
+import MainApp from "./App";
 
 
 
@@ -12,13 +9,9 @@ import {Provider} from "react-redux";
 // которая представляет все содержимое страницы в виде объектов,
 // которые можно менять.
 ReactDOM.render(
-    <BrowserRouter>
 
-            <Provider store={store}>
-                <App/>
-            </Provider>
-
-    </BrowserRouter>, document.getElementById('root')
+                <MainApp/>
+            , document.getElementById('root')
 )
 
 

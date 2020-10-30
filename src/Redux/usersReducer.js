@@ -1,11 +1,12 @@
 import {followAPI, usersAPI} from "../dalAPI/dalAPI";
+import {updateObjInArray} from "../utils/objectHelpers";
 
-const FOLLOW = `FOLLOW`
-const UNFOLLOW = `UNFOLLOW`
-const SET_USERS = `SET_USERS`
-const SET_PAGE_NUMBER = `SET_PAGE_NUMBER`
-const SWITCH_FETCHING_STATUS = `SWITCH_FETCHING_STATUS`
-const SWITCH_FOLLOWING_PROGRESS = `SWITCH_FOLLOWING_PROGRESS`
+const FOLLOW = `users/FOLLOW`
+const UNFOLLOW = `users/UNFOLLOW`
+const SET_USERS = `users/SET_USERS`
+const SET_PAGE_NUMBER = `users/SET_PAGE_NUMBER`
+const SWITCH_FETCHING_STATUS = `users/SWITCH_FETCHING_STATUS`
+const SWITCH_FOLLOWING_PROGRESS = `users/SWITCH_FOLLOWING_PROGRESS`
 
 let initialState = {
     users: [],
@@ -23,28 +24,12 @@ const usersReducer = (state = initialState, action) => {
         case FOLLOW:
             return {
                 ...state,
-                users: state.users.map(u => {
-                    if (u.id === action.userId) {
-                        return {
-                            ...u,
-                            followed: true
-                        }
-                    }
-                    return u
-                })
+                users: updateObjInArray(state.users, 'id', action.userId, {followed: true})
             }
         case UNFOLLOW:
             return {
                 ...state,
-                users: state.users.map(u => {
-                    if (u.id === action.userId) {
-                        return {
-                            ...u,
-                            followed: false
-                        }
-                    }
-                    return u
-                })
+                users: updateObjInArray(state.users, 'id', action.userId, {followed: false})
             }
         case SET_USERS:
             return {
@@ -81,38 +66,36 @@ export const switchFetchingStatus = (isFetching) => ({type: SWITCH_FETCHING_STAT
 export const switchFollowingProgress = (isFollowing, userId) => ({type: SWITCH_FOLLOWING_PROGRESS, isFollowing, userId})
 
 export const requestUsers = (pageNumber = 1) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(switchFetchingStatus(true))
-        usersAPI.requestUsers(pageNumber)
-            .then(data => {
-                    dispatch(switchFetchingStatus(false))
-                    dispatch(setUsers(data.items))
-                }
-            )
+
+        let data = await usersAPI.requestUsers(pageNumber)
+
+        dispatch(switchFetchingStatus(false))
+        dispatch(setUsers(data.items))
     }
 }
+const followUnfollowFlow = async (dispatch, userId, apiMethod, actionCreator) => {
+    dispatch(switchFollowingProgress(true, userId))
+    let resultCode = await apiMethod(userId)
+    if (resultCode === 0) {
+        dispatch(actionCreator(userId))
+
+        dispatch(switchFollowingProgress(false, userId))
+    }
+
+}
 export const unfollow = (userId) => {
-    return (dispatch) => {
-        dispatch(switchFollowingProgress(true, userId))
-        followAPI.unfollow(userId).then(resultCode => {
-                if (resultCode === 0) {
-                    dispatch(acceptUnfollow(userId))
-                }
-                dispatch(switchFollowingProgress(false, userId))
-            }
-        )
+    return async (dispatch) => {
+        followUnfollowFlow(dispatch, userId,
+            followAPI.unfollow.bind(followAPI), acceptUnfollow)
     }
 }
 export const follow = (userId) => {
-    return (dispatch) => {
-        dispatch(switchFollowingProgress(true, userId))
-        followAPI.follow(userId).then(resultCode => {
-                if (resultCode === 0) {
-                    dispatch(acceptFollow(userId))
-                }
-                dispatch(switchFollowingProgress(false, userId))
-            }
-        )
+    return async (dispatch) => {
+        followUnfollowFlow(dispatch, userId,
+            followAPI.follow.bind(followAPI), acceptFollow)
+
     }
 }
 

@@ -1,5 +1,5 @@
-const UPDATE_NEW_MESSAGE_TEXT = `UPDATE-NEW-MESSAGE-TEXT`;
-const SEND_MESSAGE = `SEND-MESSAGE`;
+const UPDATE_NEW_MESSAGE_TEXT = `dialogs/UPDATE-NEW-MESSAGE-TEXT`;
+const SEND_MESSAGE = `dialogs/SEND-MESSAGE`;
 
 let initialState = {
     messages: [

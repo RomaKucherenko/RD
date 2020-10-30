@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Nav from './components/Nav/Nav';
-import {Route} from "react-router-dom";
+import {BrowserRouter, Route} from "react-router-dom";
 import {withRouter} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
@@ -9,11 +9,12 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import NewsContainer from "./components/News/NewsContainer";
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {initializeApp} from "./Redux/appReducer";
 import {compose} from "redux";
 import Preloader from "./components/common/Preloader/Preloader";
 import Test from "./components/Test/Test";
+import store from "./Redux/reduxStore";
 
 
 // Возвращает JSX разметку - Функциональная Компонента
@@ -60,9 +61,19 @@ const mapStateToProps = (state) => {
         isAuth: state.auth.isAuth
     }
 }
-const appCompose = compose(
+
+const AppCompose = compose(
     withRouter,
     connect(mapStateToProps, {initializeApp})
 )(App)
-export default appCompose;
+
+const MainApp = (props) => {
+    return <BrowserRouter>
+        <Provider store={store}>
+            <AppCompose/>
+        </Provider>
+    </BrowserRouter>
+}
+
+export default MainApp;
 

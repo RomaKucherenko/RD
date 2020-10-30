@@ -1,47 +1,34 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import s from "./ProfileInfo.module.css"
 
-class ProfileStatus extends React.Component {
-    state = {
-        editMode: false,
-        status: this.props.status
+const ProfileStatus = (props) => {
+    let [editMode, setEditMode] = useState(false)
+    let [status, setStatus] = useState(props.status)
+    const [count, setCount] = useState(0);
+    useEffect(() => {
+        setStatus(props.status)
+    }, [props.status])
+    const activateEditMode = () => {
+        setEditMode(true)
     }
-    onChange = (e) => {
-        this.setState({
-            status: e.target.value
-        })
+    const deactivateEditMode = () => {
+        setEditMode(false)
+        props.updateStatus(status)
     }
-    activateEditMode = () => {
-        this.setState({
-            editMode: true
-        })
+    const onChange = (e) => {
+        setStatus(e.target.value)
     }
-    deactivateEditMode = () => {
-        this.setState({
-            editMode: false
-        })
-        this.props.updateStatus(this.state.status)
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps != this.props) {
-            this.setState({
-                status: this.props.status
-            })
+    return <div>
+        {editMode ?
+            <input onBlur={deactivateEditMode} value={status}
+                   onChange={onChange} autoFocus={true}/>
+            :
+            <span onClick={activateEditMode}>
+                {status ? status : "````"}
+            </span>
         }
-    }
+    </div>
 
-    render() {
-        return <div>
-            {this.state.editMode ?
-                <input onChange={this.onChange} autoFocus={true}
-                       onBlur={this.deactivateEditMode}
-                       value={this.state.status}/>
-                :
-                <span onClick={this.activateEditMode}>
-                    {this.props.status ? this.props.status: "````"}
-                </span>}
-        </div>
-    }
 }
-
-export default ProfileStatus
+//Обёртываем её для того чтобы производился lifeCycleMethod sCU
+export default React.memo(ProfileStatus)

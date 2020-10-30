@@ -1,4 +1,4 @@
-const ADD_NEWS = "ADD_NEWS"
+const ADD_NEWS = "news/ADD_NEWS"
 
 let initialState = {
     news: ["Road To The Dream", "Okay"]

@@ -7,12 +7,13 @@ const Post = (props) => {
     }
 
     return (
-        <div className={s.item}>
+        <div className={s.item} key={props.key}>
             <img src="https://litera.net.pl/wp-content/uploads/2020/07/10-najlepszych-scen-z-serialu-Wiedzmin_article.jpg"/>
             {props.message}
             <div>
                 <button onClick={onLike}>Like</button>
-                {props.likesCount}</div>
+                {props.likesCount}
+            </div>
         </div>
     )
 }
