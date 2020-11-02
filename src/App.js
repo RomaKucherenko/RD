@@ -1,9 +1,8 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import './App.css';
 import Nav from './components/Nav/Nav';
 import {BrowserRouter, Route} from "react-router-dom";
 import {withRouter} from "react-router-dom";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
@@ -15,7 +14,9 @@ import {compose} from "redux";
 import Preloader from "./components/common/Preloader/Preloader";
 import Test from "./components/Test/Test";
 import store from "./Redux/reduxStore";
+import withSuspense from "./components/Hoc/withSuspense";
 
+const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"))
 
 // Возвращает JSX разметку - Функциональная Компонента
 class App extends React.Component {
@@ -39,7 +40,7 @@ class App extends React.Component {
                     <HeaderContainer/>
                     <Nav/>
                     <div className="app-wrapper-content">
-                        <Route path="/Dialogs" render={() => <DialogsContainer/>}/>
+                        <Route path="/Dialogs" render={withSuspense(DialogsContainer)}/>
                         <Route path="/Profile/:userId?" render={() => <ProfileContainer/>}/>
                         {/*Вопросик означает что этот параметр необязательный
                 т.е., Route отрисует Profile, если userId не передан*/}

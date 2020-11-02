@@ -10,8 +10,8 @@ const SWITCH_FOLLOWING_PROGRESS = `users/SWITCH_FOLLOWING_PROGRESS`
 
 let initialState = {
     users: [],
-    pageNumber: 1,
     isFetching: false,
+    totalUsersCount: 0,
     usersInFollowingProgress: []
 }
 
@@ -34,7 +34,8 @@ const usersReducer = (state = initialState, action) => {
         case SET_USERS:
             return {
                 ...state,
-                users: [...action.users]
+                users: [...state.users, ...action.users],
+                totalUsersCount: action.totalUsersCount
             }
         case SET_PAGE_NUMBER:
             return {
@@ -60,7 +61,7 @@ const usersReducer = (state = initialState, action) => {
 
 export const acceptFollow = (userId) => ({type: FOLLOW, userId: userId})
 export const acceptUnfollow = (userId) => ({type: UNFOLLOW, userId: userId})
-export const setUsers = (users) => ({type: SET_USERS, users: users})
+export const setUsers = (users, totalUsersCount) => ({type: SET_USERS, users, totalUsersCount})
 export const setPageNumber = (pageNumber) => ({type: SET_PAGE_NUMBER, pageNumber})
 export const switchFetchingStatus = (isFetching) => ({type: SWITCH_FETCHING_STATUS, isFetching})
 export const switchFollowingProgress = (isFollowing, userId) => ({type: SWITCH_FOLLOWING_PROGRESS, isFollowing, userId})
@@ -72,7 +73,8 @@ export const requestUsers = (pageNumber = 1) => {
         let data = await usersAPI.requestUsers(pageNumber)
 
         dispatch(switchFetchingStatus(false))
-        dispatch(setUsers(data.items))
+        let {items, totalCount} = data
+        dispatch(setUsers(items, totalCount))
     }
 }
 const followUnfollowFlow = async (dispatch, userId, apiMethod, actionCreator) => {
